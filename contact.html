@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact &amp; Get a Quote | Prism Global</title>
+<meta name="description" content="Request a quote, upload a CAD file, or talk to a Prism Global engineer about your next manufacturing project.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/inner.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow" style="color:#7FB0FF;">Contact</p>
+      <h1>Get a quote or get a question answered.</h1>
+      <p>Upload a file for the fastest pricing, or tell us about your project and an engineer will follow up directly.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container contact-layout">
+
+      <div>
+        <h2 style="font-size:1.5rem; margin-bottom: var(--space-3);">Request a quote</h2>
+        <form id="quoteForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Full name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="company">Company</label>
+              <input type="text" id="company" name="company">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Work email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" name="phone">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="process">Process</label>
+            <select id="process" name="process">
+              <option>CNC machining</option>
+              <option>Injection molding</option>
+              <option>Sheet metal fabrication</option>
+              <option>3D printing</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group" id="upload">
+            <label for="file">CAD file (STEP, STL, IGES)</label>
+            <input type="file" id="file" name="file" accept=".step,.stp,.stl,.igs,.iges">
+          </div>
+          <div class="form-group">
+            <label for="message">Project details</label>
+            <textarea id="message" name="message" rows="4" placeholder="Quantity, target material, deadline — whatever you've got."></textarea>
+          </div>
+          <button type="submit" class="btn btn--primary btn--arrow">Submit request</button>
+          <div class="success-note" id="successNote">Thanks — your request has been received. An engineer will follow up by email within one business day.</div>
+        </form>
+      </div>
+
+      <div>
+        <div class="contact-info-card" id="chat">
+          <h4>Talk to engineering</h4>
+          <p>Need to walk through a complex part before quoting? Our applications engineers are available by chat, weekdays 8am–8pm CST.</p>
+          <a href="#" class="btn btn--ghost-light" style="margin-top:1em;" onclick="alert('This would open live chat in a production build.'); return false;">Start live chat</a>
+        </div>
+
+        <h3 style="font-size:1.2rem; margin-bottom: var(--space-2);">Offices</h3>
+        <div class="office-list">
+          <div class="office-item">
+            <h4>Shenzhen, China — HQ &amp; primary factory</h4>
+            <p>Building 12, Haoyu Industrial Park, Bao'an District, Shenzhen, Guangdong</p>
+          </div>
+          <div class="office-item">
+            <h4>Chicago, USA — Sales &amp; customer engineering</h4>
+            <p>Serving North American accounts, Mon–Fri 8am–6pm CST</p>
+          </div>
+          <div class="office-item">
+            <h4>Rotterdam, Netherlands — European logistics hub</h4>
+            <p>Regional distribution for European Union deliveries</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<script src="js/layout.js"></script>
+<script>
+  document.getElementById('quoteForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    document.getElementById('successNote').classList.add('show');
+    this.reset();
+  });
+</script>
+</body>
+</html>

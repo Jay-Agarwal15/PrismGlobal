@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Platform — Instant Quotes, DFM Analysis, Order Tracking | Prism Global</title>
+<meta name="description" content="The Prism Global platform gives you instant quotes, automated DFM feedback, and real-time production tracking from a single dashboard.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/inner.css">
+</head>
+<body>
+<a href="#main" class="skip-link">Skip to content</a>
+
+<main id="main">
+
+  <section class="page-hero">
+    <div class="container">
+      <p class="eyebrow" style="color:#7FB0FF;">Platform</p>
+      <h1>One dashboard, from upload to shipment.</h1>
+      <p>Quoting, design feedback, and production tracking used to live in three different inboxes. Prism Global put them in one place — so you always know what your part costs, whether it's manufacturable, and where it physically is.</p>
+    </div>
+  </section>
+
+  <!-- Feature 1: Instant Quote -->
+  <section class="section">
+    <div class="container platform-feature">
+      <div class="platform-feature-text">
+        <p class="eyebrow">Instant quoting</p>
+        <h2>Pricing in seconds, not days</h2>
+        <p>Upload a STEP, STL, or IGES file and choose a process. Our engine reads the geometry, compares it against material and machine constraints, and returns a price — no waiting on a human to read your drawing first.</p>
+        <ul class="bullet-list">
+          <li>Compare materials and finishes side by side</li>
+          <li>Adjust quantity and see pricing update live</li>
+          <li>Save and revisit quotes from your dashboard</li>
+        </ul>
+      </div>
+      <div class="platform-feature-visual">
+        <div class="mock-window" style="background:var(--prism-navy);">
+          <div class="mock-row"><span>bracket_rev4.step</span><span class="tag" style="color:#00C2A8;border-color:#00C2A8;">READY</span></div>
+          <div class="mock-row"><span>Material</span><span>6061 Aluminum</span></div>
+          <div class="mock-row"><span>Finish</span><span>Anodized, black</span></div>
+          <div class="mock-row"><span>Qty</span><span>250 units</span></div>
+          <div class="mock-row mock-row--total"><span>Unit price</span><span>$22.40</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 2: DFM -->
+  <section class="section section--tint">
+    <div class="container platform-feature platform-feature--reverse">
+      <div class="platform-feature-text">
+        <p class="eyebrow">Design for manufacturability</p>
+        <h2>Catch the issue before it becomes a reorder</h2>
+        <p>Every upload runs through automated DFM analysis: wall thickness, draft angles, tool access, and tolerance feasibility, flagged in plain language with suggested fixes.</p>
+        <ul class="bullet-list">
+          <li>Feasibility flags before you ever pay for a sample</li>
+          <li>Suggested design changes, not just a rejection</li>
+          <li>Engineers available to review edge cases by chat</li>
+        </ul>
+      </div>
+      <div class="platform-feature-visual">
+        <div class="dfm-list">
+          <div class="dfm-item"><span>Wall thickness ≥ 0.8mm</span><span class="status-ok">PASS</span></div>
+          <div class="dfm-item"><span>Draft angle on bosses</span><span class="status-warn">REVIEW</span></div>
+          <div class="dfm-item"><span>Tool access for internal radius</span><span class="status-ok">PASS</span></div>
+          <div class="dfm-item"><span>Tolerance vs. process capability</span><span class="status-ok">PASS</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feature 3: Tracking -->
+  <section class="section">
+    <div class="container platform-feature">
+      <div class="platform-feature-text">
+        <p class="eyebrow">Production tracking</p>
+        <h2>Know where your parts are, without asking</h2>
+        <p>Once an order is confirmed, track it through machining or molding, quality inspection, and shipping — with photos at key checkpoints so you're not relying on someone's word that it passed inspection.</p>
+        <ul class="bullet-list">
+          <li>Real-time status across every line item in an order</li>
+          <li>High-resolution inspection photos before shipment</li>
+          <li>Shipment tracking synced to your dashboard</li>
+        </ul>
+      </div>
+      <div class="platform-feature-visual">
+        <div class="mock-window">
+          <div class="mock-row"><span>Material prep</span><span class="tag" style="color:#00C2A8;border-color:#00C2A8;">DONE</span></div>
+          <div class="mock-row"><span>Machining</span><span class="tag" style="color:#00C2A8;border-color:#00C2A8;">DONE</span></div>
+          <div class="mock-row"><span>Quality inspection</span><span class="tag">IN PROGRESS</span></div>
+          <div class="mock-row"><span>Packing &amp; ship</span><span class="tag" style="opacity:0.4;">PENDING</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--navy">
+    <div class="container">
+      <div class="section-head center">
+        <h2>Built around your file, not a sales call</h2>
+        <p>No account manager required to get a number. Upload, price, and decide — talk to an engineer only when you actually need one.</p>
+      </div>
+      <div class="cta-actions" style="justify-content:center;">
+        <a href="contact.html" class="btn btn--primary btn--arrow">Try the instant quote</a>
+        <a href="contact.html#chat" class="btn btn--ghost-light">Talk to engineering anyway</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="js/layout.js"></script>
+</body>
+</html>
