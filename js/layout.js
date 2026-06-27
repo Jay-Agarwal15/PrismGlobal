@@ -4,7 +4,16 @@
 
 const NAV_LINKS = [
   { href: 'index.html', label: 'Home' },
-  { href: 'capabilities.html', label: 'Capabilities' },
+  {
+    href: 'capabilities.html',
+    label: 'Capabilities',
+    dropdown: [
+      { href: 'capabilities.html#cnc', label: 'CNC Machining', desc: 'Milling & turning, ±0.001″ tolerance' },
+      { href: 'capabilities.html#injection-molding', label: 'Injection Molding', desc: 'No MOQ, T1 in 2 weeks' },
+      { href: 'capabilities.html#sheet-metal', label: 'Sheet Metal', desc: 'Cutting, bending, welding' },
+      { href: 'capabilities.html#3d-printing', label: '3D Printing', desc: 'SLA, SLS, MJF, FDM' },
+    ],
+  },
   { href: 'solutions.html', label: 'Solutions' },
   { href: 'industries.html', label: 'Industries' },
   { href: 'platform.html', label: 'Platform' },
@@ -16,11 +25,39 @@ function currentPage() {
   return path === '' ? 'index.html' : path;
 }
 
+function renderNavItem(l, cur) {
+  const isActive = l.href === cur || (l.dropdown && cur === 'capabilities.html');
+  if (!l.dropdown) {
+    return `<li><a href="${l.href}" class="${isActive ? 'active' : ''}">${l.label}</a></li>`;
+  }
+  const items = l.dropdown.map(d => `
+    <a href="${d.href}" class="dropdown-item">
+      <span class="dropdown-item-label">${d.label}</span>
+      <span class="dropdown-item-desc">${d.desc}</span>
+    </a>
+  `).join('');
+  return `
+    <li class="has-dropdown">
+      <button class="nav-dropdown-trigger ${isActive ? 'active' : ''}" aria-expanded="false" aria-haspopup="true">
+        ${l.label}
+        <svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+          <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <div class="nav-dropdown">
+        <a href="${l.href}" class="dropdown-item dropdown-item--all">
+          <span class="dropdown-item-label">All capabilities</span>
+          <span class="dropdown-item-desc">See the full overview</span>
+        </a>
+        ${items}
+      </div>
+    </li>
+  `;
+}
+
 function renderHeader() {
   const cur = currentPage();
-  const links = NAV_LINKS.map(l =>
-    `<li><a href="${l.href}" class="${l.href === cur ? 'active' : ''}">${l.label}</a></li>`
-  ).join('');
+  const links = NAV_LINKS.map(l => renderNavItem(l, cur)).join('');
 
   const header = document.createElement('header');
   header.className = 'site-header';
@@ -54,6 +91,76 @@ function renderHeader() {
   toggle.addEventListener('click', () => {
     const isOpen = navLinksEl.classList.toggle('open');
     toggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  // Dropdown behavior: hover on desktop, click toggle on touch/mobile, Esc to close
+  const dropdownItems = header.querySelectorAll('.has-dropdown');
+  dropdownItems.forEach((item) => {
+    const trigger = item.querySelector('.nav-dropdown-trigger');
+    const panel = item.querySelector('.nav-dropdown');
+
+    const openDropdown = () => {
+      item.classList.add('open');
+      trigger.setAttribute('aria-expanded', 'true');
+    };
+    const closeDropdown = () => {
+      item.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    };
+
+    let hoverTimeout;
+    item.addEventListener('mouseenter', () => {
+      if (window.innerWidth <= 920) return; // mobile uses click only
+      clearTimeout(hoverTimeout);
+      openDropdown();
+    });
+    item.addEventListener('mouseleave', () => {
+      if (window.innerWidth <= 920) return;
+      hoverTimeout = setTimeout(closeDropdown, 150);
+    });
+
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isOpen = item.classList.contains('open');
+      // close any other open dropdowns first
+      dropdownItems.forEach((other) => {
+        if (other !== item) {
+          other.classList.remove('open');
+          other.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded', 'false');
+        }
+      });
+      if (isOpen) {
+        closeDropdown();
+      } else {
+        openDropdown();
+        trigger.focus();
+      }
+    });
+
+    trigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeDropdown();
+        trigger.blur();
+      }
+    });
+  });
+
+  document.addEventListener('click', (e) => {
+    dropdownItems.forEach((item) => {
+      if (!item.contains(e.target)) {
+        item.classList.remove('open');
+        item.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      dropdownItems.forEach((item) => {
+        item.classList.remove('open');
+        item.querySelector('.nav-dropdown-trigger').setAttribute('aria-expanded', 'false');
+      });
+    }
   });
 }
 
