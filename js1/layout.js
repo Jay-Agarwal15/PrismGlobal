@@ -87,56 +87,15 @@ const NAV_LINKS = [
       desc: 'Tailored manufacturing solutions for demanding sectors.',
       sectionTitle: 'Industries We Serve',
       items: [
-        { href: 'industries.html#aerospace',     label: 'Aerospace',       icon: 'aerospace' },
         { href: 'industries.html#medical',       label: 'Medical Devices', icon: 'medical' },
-        { href: 'industries.html#automotive',    label: 'Automotive',      icon: 'automotive' },
         { href: 'industries.html#robotics',      label: 'Robotics',        icon: 'robotics' },
         { href: 'industries.html#electronics',   label: 'Electronics',     icon: 'electronics' },
-        { href: 'industries.html#communication', label: 'Communication',  icon: 'communication' },
         { href: 'industries.html#semiconductor', label: 'Semiconductor',   icon: 'semiconductor' },
-        { href: 'industries.html#new-energy',    label: 'New Energy',     icon: 'newenergy' },
         { href: 'industries.html#consumer',      label: 'Consumer Goods', icon: 'consumer' },
-        { href: 'industries.html#industrial',    label: 'Industrial',     icon: 'industrial' },
       ],
     },
   },
-  {
-    href: 'platform.html',
-    label: 'Platform',
-    megamenu: {
-      heading: 'Our Platform',
-      desc: 'Manage your entire manufacturing lifecycle in one place.',
-      cols: [
-        {
-          title: 'Online Platform',
-          plain: [
-            { href: 'platform.html', label: 'Instant Quoting' },
-            { href: 'platform.html', label: 'DFM Analysis' },
-            { href: 'platform.html', label: 'Production Tracking' },
-          ],
-        },
-        {
-          title: 'Teamspace',
-          plain: [
-            { href: 'platform.html#teamspace', label: 'Shared Orders' },
-            { href: 'platform.html#teamspace', label: 'Team Collaboration' },
-            { href: 'platform.html#teamspace', label: 'Access Tiers' },
-          ],
-        },
-      ],
-      // Right column: numbered steps + CTA, distinct visual treatment
-      steps: {
-        title: 'AI Creator Lab',
-        badge: 'NEW',
-        items: [
-          'Communicate Requirements',
-          'Get Renders',
-          'Build 3D Models',
-        ],
-        cta: { href: 'platform.html#ai-creator-lab', label: 'Start Production' },
-      },
-    },
-  },
+  { href: 'platform.html',   label: 'Platform' },
   { href: 'about.html',      label: 'About' },
 ];
 
@@ -309,58 +268,6 @@ function renderIndustriesMega(l, isActive) {
   `;
 }
 
-function renderPlatformMega(l, isActive) {
-  const m = l.megamenu;
-  const caretSvg = `<svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-
-  const colsHtml = m.cols.map(col => {
-    const links = col.plain.map(it => `<a href="${it.href}" class="mega-plain-item">${it.label}</a>`).join('');
-    return `
-      <div class="mega-col">
-        <p class="mega-col-title mega-col-title--accent">${col.title}</p>
-        <hr class="mega-col-rule">
-        ${links}
-      </div>`;
-  }).join('');
-
-  const stepsHtml = m.steps.items.map((label, i) => `
-    <li><span class="process-list-num">${i + 1}</span>${label}</li>
-  `).join('');
-
-  const stepsCol = `
-    <div class="mega-col platform-steps-col">
-      <p class="mega-col-title mega-col-title--accent">
-        ${m.steps.title}${m.steps.badge ? ` <span class="mega-badge">${m.steps.badge}</span>` : ''}
-      </p>
-      <hr class="mega-col-rule">
-      <ol class="process-list process-list--mega">
-        ${stepsHtml}
-      </ol>
-      <a href="${m.steps.cta.href}" class="btn btn--ghost-light platform-steps-cta">${m.steps.cta.label} →</a>
-    </div>
-  `;
-
-  return `
-    <li class="has-dropdown has-megamenu">
-      <button class="nav-dropdown-trigger ${isActive ? 'active' : ''}" aria-expanded="false" aria-haspopup="true">
-        ${l.label}${caretSvg}
-      </button>
-      <div class="nav-dropdown nav-megamenu">
-        <div class="cmega-inner">
-          <div class="cmega-left mega-left">
-            <p class="cmega-heading">${m.heading}</p>
-            <p class="cmega-desc">${m.desc}</p>
-          </div>
-          <div class="cmega-content mega-content">
-            ${colsHtml}
-            ${stepsCol}
-          </div>
-        </div>
-      </div>
-    </li>
-  `;
-}
-
 function renderNavItem(l, cur) {
   const isActive = l.href === cur;
   const caretSvg = `<svg class="caret" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
@@ -373,9 +280,6 @@ function renderNavItem(l, cur) {
   }
   if (l.href === 'industries.html' && l.megamenu && l.megamenu.items) {
     return renderIndustriesMega(l, isActive);
-  }
-  if (l.href === 'platform.html' && l.megamenu && l.megamenu.steps) {
-    return renderPlatformMega(l, isActive);
   }
   return `<li><a href="${l.href}" class="${isActive ? 'active' : ''}">${l.label}</a></li>`;
 }
