@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Get Quote With AI — How It Works</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+
+body{
+  font-family:'Inter',sans-serif;
+  background:#03060f;
+  color:#e8eaf0;
+}
+
+.section{
+  padding:72px 32px;
+  max-width:860px;
+  margin:0 auto;
+}
+
+/* ── TOP BADGE ── */
+.top-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#080e1e;
+  border:1px solid #1a2540;
+  border-radius:30px;padding:6px 16px 6px 10px;
+  font-size:11px;font-weight:700;color:#60a5fa;
+  letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:28px;
+}
+.badge-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:#3b82f6;
+  box-shadow:0 0 0 0 rgba(59,130,246,0.6);
+  animation:pulse 1.8s infinite;
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(59,130,246,0.6);}
+  70%{box-shadow:0 0 0 8px rgba(59,130,246,0);}
+  100%{box-shadow:0 0 0 0 rgba(59,130,246,0);}
+}
+
+/* ── HEADING ── */
+.heading{
+  font-size:42px;font-weight:800;line-height:1.1;
+  letter-spacing:-1.5px;color:#f0f4ff;
+  margin-bottom:14px;
+}
+.heading span{
+  background:linear-gradient(90deg,#3b82f6,#818cf8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.subhead{
+  font-size:15px;color:#3a4a6a;
+  max-width:480px;line-height:1.75;
+  margin-bottom:44px;
+}
+
+/* ── TRUST STATS ── */
+.stats-row{
+  display:flex;gap:14px;flex-wrap:wrap;
+  margin-bottom:56px;
+}
+.stat-card{
+  background:#080e1e;
+  border:1px solid #1a2540;
+  border-radius:12px;
+  padding:14px 22px;
+}
+.stat-num{font-size:20px;font-weight:800;color:#f0f4ff;line-height:1;}
+.stat-num span{color:#3b82f6;font-size:13px;font-weight:600;}
+.stat-label{font-size:11px;color:#1e3060;text-transform:uppercase;letter-spacing:0.8px;margin-top:4px;}
+
+/* ── PHASE LABEL ── */
+.phase-label{
+  display:flex;align-items:center;gap:10px;
+  margin:36px 0 8px;
+}
+.phase-pill{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  padding:4px 14px;border-radius:20px;
+}
+.phase-pill.user{background:rgba(59,130,246,0.1);color:#60a5fa;border:1px solid rgba(59,130,246,0.2);}
+.phase-pill.mfg{background:rgba(34,197,94,0.08);color:#4ade80;border:1px solid rgba(34,197,94,0.18);}
+.phase-line{flex:1;height:1px;background:#0d1730;}
+
+/* ── STEPS ── */
+.steps{display:flex;flex-direction:column;gap:0;}
+
+.step{
+  display:grid;
+  grid-template-columns:60px 1fr;
+  gap:20px;
+  padding:26px 0;
+  position:relative;
+}
+.step:not(:last-child)::after{
+  content:'';
+  position:absolute;
+  left:29px;top:86px;bottom:0;
+  width:2px;
+  background:linear-gradient(to bottom,#0d2060,transparent);
+}
+
+.step-icon{
+  width:58px;height:58px;border-radius:16px;
+  background:#080e1e;
+  border:1px solid #1a2540;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;flex-shrink:0;
+  position:relative;z-index:1;
+  box-shadow:0 0 0 4px #03060f;
+}
+.step-icon.green-border{border-color:rgba(34,197,94,0.3);}
+
+.step-body{padding-top:8px;}
+.step-num{font-size:10px;font-weight:700;letter-spacing:2px;color:#1e3a6a;text-transform:uppercase;margin-bottom:5px;}
+.step-title{font-size:18px;font-weight:700;color:#e8eeff;margin-bottom:6px;line-height:1.3;}
+.step-desc{font-size:13px;color:#3a4a6a;line-height:1.8;max-width:560px;}
+
+.step-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+.step-tag{
+  display:inline-block;
+  font-size:10px;font-weight:700;
+  padding:3px 12px;border-radius:20px;letter-spacing:0.5px;
+}
+.step-tag.blue{background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.2);color:#3b82f6;}
+.step-tag.green{background:rgba(34,197,94,0.07);border:1px solid rgba(34,197,94,0.2);color:#4ade80;}
+.step-tag.purple{background:rgba(139,92,246,0.07);border:1px solid rgba(139,92,246,0.2);color:#a78bfa;}
+.step-tag.amber{background:rgba(251,146,60,0.07);border:1px solid rgba(251,146,60,0.2);color:#fb923c;}
+
+/* ── BRANCH CARD (decision/alternative boxes) ── */
+.branch-wrap{
+  margin:4px 0 4px 78px;
+  display:flex;gap:12px;flex-wrap:wrap;
+}
+.branch-card{
+  flex:1;min-width:200px;
+  border-radius:12px;padding:16px 18px;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.branch-card.alt{
+  background:#0d0a06;
+  border:1px solid rgba(251,146,60,0.2);
+}
+.branch-card.ok{
+  background:#080e1e;
+  border:1px solid rgba(34,197,94,0.2);
+}
+.branch-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.branch-body{}
+.branch-title{font-size:12px;font-weight:700;color:#e8eeff;margin-bottom:3px;}
+.branch-desc{font-size:11px;color:#3a4a6a;line-height:1.6;}
+
+/* ── DIVIDER ── */
+.divider{
+  height:1px;
+  background:linear-gradient(90deg,transparent,#0d1a3a 30%,#0d1a3a 70%,transparent);
+  margin:48px 0;
+}
+
+/* ── OUTCOME ── */
+.outcome{
+  background:linear-gradient(135deg,#050c1f,#08152e);
+  border:1px solid #1a2f5a;
+  border-radius:20px;
+  padding:40px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;flex-wrap:wrap;
+}
+.outcome-left{}
+.outcome-label{font-size:10px;font-weight:700;letter-spacing:2px;color:#4ade80;text-transform:uppercase;margin-bottom:10px;}
+.outcome-title{font-size:22px;font-weight:800;color:#e8eeff;line-height:1.35;}
+.outcome-desc{font-size:13px;color:#2a3a5a;margin-top:8px;max-width:340px;line-height:1.7;}
+.outcome-right{text-align:center;}
+.cta-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(90deg,#1d4ed8,#3b82f6);
+  color:#fff;font-size:14px;font-weight:700;
+  padding:15px 28px;border-radius:12px;
+  text-decoration:none;
+  box-shadow:0 4px 24px rgba(59,130,246,0.35);
+  transition:transform 0.15s,box-shadow 0.15s;
+  white-space:nowrap;
+}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(59,130,246,0.5);}
+.cta-sub{font-size:11px;color:#1e2a4a;margin-top:8px;}
+
+@media(max-width:600px){
+  .heading{font-size:30px;}
+  .outcome{flex-direction:column;}
+  .cta-btn{width:100%;justify-content:center;}
+  .branch-wrap{margin-left:0;}
+}
+</style>
+</head>
+<body>
+<div class="section">
+
+  <!-- BADGE -->
+  <div class="top-badge">
+    <div class="badge-dot"></div>
+    Get Quote With AI — How it works
+  </div>
+
+  <!-- HEADING -->
+  <h2 class="heading">Your quote, built by<br><span>Artificial Intelligence.</span></h2>
+  <p class="subhead">Upload your design. Our AI checks feasibility, recommends materials, and delivers an accurate manufacturing quote — in minutes.</p>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-num">AI <span>powered</span></div>
+      <div class="stat-label">Feasibility check</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">Auto <span>sent</span></div>
+      <div class="stat-label">Quote to WhatsApp</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">Real <span>engineers</span></div>
+      <div class="stat-label">Review every order</div>
+    </div>
+  </div>
+
+  <!-- ══ USER PHASE ══ -->
+  <div class="phase-label">
+    <div class="phase-pill user">Your side</div>
+    <div class="phase-line"></div>
+  </div>
+
+  <div class="steps">
+
+    <!-- STEP 1 -->
+    <div class="step">
+      <div class="step-icon">📁</div>
+      <div class="step-body">
+        <div class="step-num">Step 01</div>
+        <div class="step-title">Upload your drawing</div>
+        <div class="step-desc">Open the AI chatbot and upload your design — CAD file, PDF blueprint, or a photo of your sketch. Our AI reads it automatically with no manual data entry needed.</div>
+        <div class="step-tags">
+          <span class="step-tag blue">CAD · PDF · Image file</span>
+          <span class="step-tag purple">No account needed</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step">
+      <div class="step-icon">🤖</div>
+      <div class="step-body">
+        <div class="step-num">Step 02</div>
+        <div class="step-title">AI runs a feasibility check</div>
+        <div class="step-desc">Our AI analyses your drawing for structure, tolerances, and dimensions against real manufacturing constraints — instantly. If your design has issues, it flags them clearly with suggestions to fix them.</div>
+        <div class="step-tags">
+          <span class="step-tag green">✓ Feasible — move forward</span>
+          <span class="step-tag amber">⚠ Issues flagged with fixes</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BRANCH: infeasible -->
+  <div class="branch-wrap">
+    <div class="branch-card alt">
+      <div class="branch-icon">🔄</div>
+      <div class="branch-body">
+        <div class="branch-title">Not feasible? AI flags the issues</div>
+        <div class="branch-desc">Clear explanation of what's wrong and what to change — so you can revise and resubmit easily.</div>
+      </div>
+    </div>
+    <div class="branch-card ok">
+      <div class="branch-icon">✅</div>
+      <div class="branch-body">
+        <div class="branch-title">Feasible? Continue to materials</div>
+        <div class="branch-desc">Your design passes — AI moves you straight to material selection.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps" style="margin-top:8px;">
+
+    <!-- STEP 3 -->
+    <div class="step">
+      <div class="step-icon">🧱</div>
+      <div class="step-body">
+        <div class="step-num">Step 03</div>
+        <div class="step-title">AI suggests the best materials</div>
+        <div class="step-desc">Based on your design and intended use, our AI recommends the most suitable materials — ranked by cost, strength, weight, and lead time. It explains why each material fits your part so you can make an informed choice.</div>
+        <div class="step-tags">
+          <span class="step-tag blue">Metals · Plastics · Composites</span>
+          <span class="step-tag purple">Per-part recommendations</span>
+          <span class="step-tag green">Side-by-side comparison</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step">
+      <div class="step-icon">🎯</div>
+      <div class="step-body">
+        <div class="step-num">Step 04</div>
+        <div class="step-title">You select your material</div>
+        <div class="step-desc">Pick from the AI's suggestions or choose your own. Not sure? The AI tells you exactly what each material means for price and performance — no guesswork.</div>
+        <div class="step-tags">
+          <span class="step-tag blue">AI-guided selection</span>
+          <span class="step-tag amber">Change anytime before confirming</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step">
+      <div class="step-icon">💰</div>
+      <div class="step-body">
+        <div class="step-num">Step 05</div>
+        <div class="step-title">Your quote is generated instantly</div>
+        <div class="step-desc">Based on your design and selected material, the AI calculates a full manufacturing quote — unit price, production timeline, and delivery estimate. If the price feels too high, you have options.</div>
+        <div class="step-tags">
+          <span class="step-tag green">Instant — no waiting</span>
+          <span class="step-tag blue">Full price breakdown</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BRANCH: not satisfied -->
+  <div class="branch-wrap">
+    <div class="branch-card alt">
+      <div class="branch-icon">💡</div>
+      <div class="branch-body">
+        <div class="branch-title">Quote too expensive?</div>
+        <div class="branch-desc">AI offers cheaper material alternatives or suggests a revised design that keeps your requirements but lowers cost. Reselect and quote updates instantly.</div>
+      </div>
+    </div>
+    <div class="branch-card ok">
+      <div class="branch-icon">✅</div>
+      <div class="branch-body">
+        <div class="branch-title">Happy with the quote?</div>
+        <div class="branch-desc">Confirm and your quote is automatically sent to your registered WhatsApp number.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="steps" style="margin-top:8px;">
+
+    <!-- STEP 6 -->
+    <div class="step">
+      <div class="step-icon">
+        <svg style="width:26px;height:26px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 4C7.589 4 4 7.589 4 12c0 1.42.374 2.75 1.025 3.904L4.04 19.96l4.056-1.064A7.953 7.953 0 0012 20c4.411 0 8-3.589 8-8s-3.589-8-8-8zm0 14.4a6.38 6.38 0 01-3.26-.896l-.234-.139-2.426.636.648-2.365-.153-.243A6.358 6.358 0 015.6 12c0-3.529 2.871-6.4 6.4-6.4 3.529 0 6.4 2.871 6.4 6.4 0 3.529-2.871 6.4-6.4 6.4z" fill="white"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="step-num">Step 06</div>
+        <div class="step-title">Quote sent to your <svg style="display:inline-block;vertical-align:middle;width:20px;height:20px;margin:0 2px -3px 2px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 4C7.589 4 4 7.589 4 12c0 1.42.374 2.75 1.025 3.904L4.04 19.96l4.056-1.064A7.953 7.953 0 0012 20c4.411 0 8-3.589 8-8s-3.589-8-8-8zm0 14.4a6.38 6.38 0 01-3.26-.896l-.234-.139-2.426.636.648-2.365-.153-.243A6.358 6.358 0 015.6 12c0-3.529 2.871-6.4 6.4-6.4 3.529 0 6.4 2.871 6.4 6.4 0 3.529-2.871 6.4-6.4 6.4z" fill="white"/></svg> automatically</div>
+        <div class="step-desc">Once you confirm, the full quotation — design summary, material choice, price, and timeline — is <mark style="background:rgba(59,130,246,0.15);color:#60a5fa;padding:2px 8px;border-radius:5px;font-weight:700;">auto-sent to your registered number.</mark> No email chains, no PDFs to chase.</div>
+        <div class="step-tags">
+          <span class="step-tag green">Auto-sent to your number</span>
+          <span class="step-tag blue">Full quote in one message</span>
+          <span class="step-tag purple">Order locked in instantly</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 7 -->
+    <div class="step">
+      <div class="step-icon">🛒</div>
+      <div class="step-body">
+        <div class="step-num">Step 07</div>
+        <div class="step-title">You confirm your order</div>
+        <div class="step-desc">Reply on WhatsApp to place your order. The moment you confirm, our manufacturing system kicks into action automatically — no delays, no manual handoffs needed from your side.</div>
+        <div class="step-tags">
+          <span class="step-tag green">One reply to confirm</span>
+          <span class="step-tag blue">Production starts immediately</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- ══ MANUFACTURER PHASE ══ -->
+  <div class="phase-label">
+    <div class="phase-pill mfg">Our side — what happens next</div>
+    <div class="phase-line"></div>
+  </div>
+
+  <div class="steps">
+
+    <!-- STEP 8 -->
+    <div class="step">
+      <div class="step-icon green-border">🏭</div>
+      <div class="step-body">
+        <div class="step-num">Step 08</div>
+        <div class="step-title">System selects the right vendor</div>
+        <div class="step-desc">Our internal system automatically matches your order to the best-fit vendor based on your design type, chosen material, and current production capacity — no manual allocation needed.</div>
+        <div class="step-tags">
+          <span class="step-tag green">Auto vendor matching</span>
+          <span class="step-tag blue">Based on design & materials</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 9 -->
+    <div class="step">
+      <div class="step-icon green-border">🔔</div>
+      <div class="step-body">
+        <div class="step-num">Step 09</div>
+        <div class="step-title">Available engineer is notified</div>
+        <div class="step-desc">A push notification is sent instantly to an available engineer on our team. They receive the full order details, design file, and material specifications to review.</div>
+        <div class="step-tags">
+          <span class="step-tag green">Push notification sent</span>
+          <span class="step-tag amber">Response within minutes</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 10 -->
+    <div class="step">
+      <div class="step-icon green-border">✅</div>
+      <div class="step-body">
+        <div class="step-num">Step 10</div>
+        <div class="step-title">Engineer reviews and confirms</div>
+        <div class="step-desc">Our engineer verifies the design, validates the vendor match, and confirms the job. If they need a second engineer, the system automatically re-notifies until confirmed.</div>
+        <div class="step-tags">
+          <span class="step-tag green">Engineer confirmed</span>
+          <span class="step-tag amber">Auto re-notify if unavailable</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 11 -->
+    <div class="step">
+      <div class="step-icon green-border">📦</div>
+      <div class="step-body">
+        <div class="step-num">Step 11</div>
+        <div class="step-title">Design & instructions sent to vendor</div>
+        <div class="step-desc">The confirmed engineer forwards your design files and full assembly instructions directly to the vendor. Production begins — and you get live WhatsApp updates every step of the way.</div>
+        <div class="step-tags">
+          <span class="step-tag green">Files + instructions forwarded</span>
+          <span class="step-tag blue">Production begins</span>
+          <span class="step-tag purple">You get live updates</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- OUTCOME -->
+  <div class="outcome">
+    <div class="outcome-left">
+      <div class="outcome-label">✓ End result</div>
+      <div class="outcome-title">Design uploaded.<br>Order in production.</div>
+      <div class="outcome-desc">From your first file upload to production start — fully automated, fully transparent, with zero phone calls or paperwork.</div>
+    </div>
+    <div class="outcome-right">
+      <a class="cta-btn" href="#">
+        ✦ &nbsp;Try AI Quote — It's Free
+      </a>
+      <div class="cta-sub">Upload your design · Quote in minutes · No commitment</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

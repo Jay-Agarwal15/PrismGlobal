@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>How It Works — Instant Quote</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+
+  body{
+    font-family:'Inter',sans-serif;
+    background:#03060f;
+    color:#e8eaf0;
+  }
+
+  /* ── SECTION WRAPPER ── */
+  .hiw-section{
+    padding:80px 24px;
+    max-width:880px;
+    margin:0 auto;
+  }
+
+  /* ── TOP BADGE ── */
+  .hiw-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:rgba(37,99,235,0.12);
+    border:1px solid rgba(37,99,235,0.35);
+    border-radius:30px;padding:5px 16px 5px 10px;
+    font-size:11px;font-weight:700;color:#60a5fa;
+    letter-spacing:1px;text-transform:uppercase;
+    margin-bottom:24px;
+  }
+  .hiw-badge-dot{
+    width:8px;height:8px;border-radius:50%;
+    background:#25D366;
+    box-shadow:0 0 6px #25D366;
+  }
+
+  /* ── HEADING ── */
+  .hiw-heading{
+    font-size:44px;font-weight:800;line-height:1.08;
+    letter-spacing:-1.5px;color:#f0f4ff;
+    margin-bottom:14px;
+  }
+  .hiw-heading span{
+    background:linear-gradient(90deg,#3b82f6,#60a5fa);
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  }
+  .hiw-sub{
+    font-size:15px;color:#5a6a8a;
+    max-width:460px;line-height:1.75;
+    margin-bottom:44px;
+  }
+
+  /* ── TRUST STATS ── */
+  .hiw-stats{
+    display:flex;gap:14px;flex-wrap:wrap;
+    margin-bottom:56px;
+  }
+  .hiw-stat{
+    background:#080e1e;
+    border:1px solid #1a2540;
+    border-radius:12px;
+    padding:14px 22px;
+  }
+  .hiw-stat-num{
+    font-size:20px;font-weight:800;color:#f0f4ff;line-height:1;
+  }
+  .hiw-stat-num span{color:#3b82f6;font-size:13px;font-weight:600;}
+  .hiw-stat-label{font-size:11px;color:#3a4a6a;text-transform:uppercase;letter-spacing:0.8px;margin-top:4px;}
+
+  /* ── STEPS ── */
+  .hiw-steps{display:flex;flex-direction:column;gap:0;position:relative;}
+
+  .hiw-step{
+    display:grid;
+    grid-template-columns:60px 1fr;
+    gap:20px;
+    padding:28px 0;
+    position:relative;
+  }
+  .hiw-step:not(:last-child)::after{
+    content:'';
+    position:absolute;
+    left:29px;top:88px;bottom:-28px;
+    width:2px;
+    background:linear-gradient(to bottom,#1a2f5a,#0d1730);
+  }
+
+  .hiw-step-icon{
+    width:58px;height:58px;border-radius:16px;
+    background:#080e1e;
+    border:1px solid #1a2540;
+    display:flex;align-items:center;justify-content:center;
+    font-size:24px;
+    flex-shrink:0;
+    position:relative;z-index:1;
+    box-shadow:0 0 0 4px #03060f;
+  }
+
+  .hiw-step-body{padding-top:10px;}
+  .hiw-step-num{
+    font-size:10px;font-weight:700;letter-spacing:2px;
+    color:#1e3a6a;text-transform:uppercase;margin-bottom:5px;
+  }
+  .hiw-step-title{
+    font-size:18px;font-weight:700;color:#e8eeff;
+    margin-bottom:7px;line-height:1.3;
+  }
+  .hiw-step-desc{
+    font-size:13px;color:#4a5a7a;
+    line-height:1.8;max-width:540px;
+  }
+  .hiw-step-tag{
+    display:inline-block;margin-top:10px;
+    background:rgba(37,99,235,0.08);
+    border:1px solid rgba(37,99,235,0.2);
+    color:#3b82f6;
+    font-size:10px;font-weight:700;
+    padding:3px 12px;border-radius:20px;letter-spacing:0.5px;
+  }
+
+  /* ── OUTCOME CARD ── */
+  .hiw-outcome{
+    margin-top:52px;
+    background:linear-gradient(135deg,#050c1f 0%,#08152e 100%);
+    border:1px solid #1a2f5a;
+    border-radius:20px;
+    padding:40px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:28px;
+    flex-wrap:wrap;
+  }
+  .hiw-outcome-label{
+    font-size:10px;font-weight:700;letter-spacing:2px;
+    color:#25D366;text-transform:uppercase;margin-bottom:10px;
+  }
+  .hiw-outcome-title{
+    font-size:22px;font-weight:700;
+    color:#e8eeff;line-height:1.35;
+  }
+  .hiw-outcome-desc{
+    font-size:13px;color:#3a4a6a;
+    margin-top:8px;max-width:340px;line-height:1.7;
+  }
+
+  /* ── CTA BUTTON ── */
+  .hiw-cta{
+    display:inline-flex;align-items:center;gap:10px;
+    background:#25D366;color:#fff;
+    font-size:14px;font-weight:700;
+    padding:15px 28px;border-radius:12px;
+    text-decoration:none;
+    box-shadow:0 4px 24px rgba(37,211,102,0.3);
+    transition:transform 0.15s,box-shadow 0.15s;
+    white-space:nowrap;
+  }
+  .hiw-cta:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 32px rgba(37,211,102,0.4);
+  }
+  .hiw-cta svg{width:20px;height:20px;flex-shrink:0;}
+  .hiw-cta-sub{
+    font-size:11px;color:#2a3a4a;
+    margin-top:8px;text-align:center;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:600px){
+    .hiw-heading{font-size:30px;}
+    .hiw-outcome{flex-direction:column;}
+    .hiw-outcome-right{width:100%;}
+    .hiw-cta{width:100%;justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<section class="hiw-section">
+
+  <!-- Badge -->
+  <div class="hiw-badge">
+    <div class="hiw-badge-dot"></div>
+    Instant Quote — How it works
+  </div>
+
+  <!-- Heading -->
+  <h2 class="hiw-heading">Get your quote in<br><span>4 simple steps.</span></h2>
+  <p class="hiw-sub"><mark style="background:rgba(37,99,235,0.15);color:#60a5fa;padding:3px 10px;border-radius:6px;font-weight:800;font-size:17px;">No forms. No waiting days.</mark> Just send us your design on <svg style="display:inline-block;vertical-align:middle;width:20px;height:20px;margin:0 2px -2px 2px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 4C7.589 4 4 7.589 4 12c0 1.42.374 2.75 1.025 3.904L4.04 19.96l4.056-1.064A7.953 7.953 0 0012 20c4.411 0 8-3.589 8-8s-3.589-8-8-8zm0 14.4a6.38 6.38 0 01-3.26-.896l-.234-.139-2.426.636.648-2.365-.153-.243A6.358 6.358 0 015.6 12c0-3.529 2.871-6.4 6.4-6.4 3.529 0 6.4 2.871 6.4 6.4 0 3.529-2.871 6.4-6.4 6.4z" fill="white"/></svg> and we'll send back a real price fast.</p>
+
+  <!-- Stats -->
+  <div class="hiw-stats">
+    <div class="hiw-stat">
+      <div class="hiw-stat-num">4 <span>hrs</span></div>
+      <div class="hiw-stat-label">Average quote time</div>
+    </div>
+    <div class="hiw-stat">
+      <div class="hiw-stat-num">100% <span>free</span></div>
+      <div class="hiw-stat-label">No cost to quote</div>
+    </div>
+    <div class="hiw-stat">
+      <div class="hiw-stat-num">Real <span>engineers</span></div>
+      <div class="hiw-stat-label">Every quote reviewed by us</div>
+    </div>
+  </div>
+
+  <!-- Steps -->
+  <div class="hiw-steps">
+
+    <div class="hiw-step">
+      <div class="hiw-step-icon">🖱️</div>
+      <div class="hiw-step-body">
+        <div class="hiw-step-num">Step 01</div>
+        <div class="hiw-step-title">Click "Instant Quote" on our website</div>
+        <div class="hiw-step-desc">Hit the Instant Quote button on any page. You'll be taken straight to our <svg style="display:inline-block;vertical-align:middle;width:22px;height:22px;margin:0 3px -3px 3px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 4C7.589 4 4 7.589 4 12c0 1.42.374 2.75 1.025 3.904L4.04 19.96l4.056-1.064A7.953 7.953 0 0012 20c4.411 0 8-3.589 8-8s-3.589-8-8-8zm0 14.4a6.38 6.38 0 01-3.26-.896l-.234-.139-2.426.636.648-2.365-.153-.243A6.358 6.358 0 015.6 12c0-3.529 2.871-6.4 6.4-6.4 3.529 0 6.4 2.871 6.4 6.4 0 3.529-2.871 6.4-6.4 6.4z" fill="white"/></svg> — <mark style="background:rgba(37,99,235,0.15);color:#60a5fa;padding:4px 12px;border-radius:6px;font-weight:800;font-size:17px;display:inline-block;margin-top:6px;">no sign-up, no forms, no waiting around</mark></div>
+        <div class="hiw-step-tag">Takes 2 seconds</div>
+      </div>
+    </div>
+
+    <div class="hiw-step">
+      <div class="hiw-step-icon">📎</div>
+      <div class="hiw-step-body">
+        <div class="hiw-step-num">Step 02</div>
+        <div class="hiw-step-title">Send your design &amp; project details</div>
+        <div class="hiw-step-desc">Share your design file, a photo, or a sketch whatever you have. Tell us the material, quantity, and any special requirements. We'll guide you if you're unsure.</div>
+        <div class="hiw-step-tag">Photos, PDFs, sketches all accepted</div>
+      </div>
+    </div>
+
+    <div class="hiw-step">
+      <div class="hiw-step-icon">⚙️</div>
+      <div class="hiw-step-body">
+        <div class="hiw-step-num">Step 03</div>
+        <div class="hiw-step-title">Our AI Agents reviews your project</div>
+        <div class="hiw-step-desc">An AI Agents checks your design for feasibility, calculates material and production costs, and estimates the delivery timeline. No guesswork ever.</div>
+        <div class="hiw-step-tag">Engineer-verified, every time</div>
+      </div>
+    </div>
+
+    <div class="hiw-step">
+      <div class="hiw-step-icon">💬</div>
+      <div class="hiw-step-body">
+        <div class="hiw-step-num">Step 04</div>
+        <div class="hiw-step-title">Receive your personalised quote</div>
+        <div class="hiw-step-desc">We send you a clear quote on <svg style="display:inline-block;vertical-align:middle;width:20px;height:20px;margin:0 2px -2px 2px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 4C7.589 4 4 7.589 4 12c0 1.42.374 2.75 1.025 3.904L4.04 19.96l4.056-1.064A7.953 7.953 0 0012 20c4.411 0 8-3.589 8-8s-3.589-8-8-8zm0 14.4a6.38 6.38 0 01-3.26-.896l-.234-.139-2.426.636.648-2.365-.153-.243A6.358 6.358 0 015.6 12c0-3.529 2.871-6.4 6.4-6.4 3.529 0 6.4 2.871 6.4 6.4 0 3.529-2.871 6.4-6.4 6.4z" fill="white"/></svg> exact price, production timeline, and next steps. Accept, ask questions, or request changes. No pressure, no hidden fees.</div>
+        <div class="hiw-step-tag">Price + timeline in one message</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Outcome -->
+  <div class="hiw-outcome">
+    <div class="hiw-outcome-left">
+      <div class="hiw-outcome-label">✓ What happens next</div>
+      <div class="hiw-outcome-title">Happy with the quote?<br>We start production immediately.</div>
+      <div class="hiw-outcome-desc">Once you confirm, your order goes straight into our production queue. We keep you updated on <svg style="display:inline-block;vertical-align:middle;width:20px;height:20px;margin:0 2px -2px 2px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 4C7.589 4 4 7.589 4 12c0 1.42.374 2.75 1.025 3.904L4.04 19.96l4.056-1.064A7.953 7.953 0 0012 20c4.411 0 8-3.589 8-8s-3.589-8-8-8zm0 14.4a6.38 6.38 0 01-3.26-.896l-.234-.139-2.426.636.648-2.365-.153-.243A6.358 6.358 0 015.6 12c0-3.529 2.871-6.4 6.4-6.4 3.529 0 6.4 2.871 6.4 6.4 0 3.529-2.871 6.4-6.4 6.4z" fill="white"/></svg> every step of the way.</div>
+    </div>
+    <div class="hiw-outcome-right">
+      <!--
+        HOW TO LINK YOUR WHATSAPP:
+        Replace YOUR_NUMBER below with your number in international format
+        Example: +919876543210 becomes 919876543210 (no + or spaces)
+        Full link: https://wa.me/919876543210
+      -->
+      <a class="hiw-cta" href="https://wa.me/YOURNUMBER" target="_blank">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.532 5.862L.057 23.998l6.305-1.654A11.954 11.954 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.854 0-3.584-.504-5.073-1.383l-.361-.214-3.741.981.998-3.648-.235-.374A9.953 9.953 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Get Instant Quote
+      </a>
+      <div class="hiw-cta-sub">Opens <svg style="display:inline-block;vertical-align:middle;width:16px;height:16px;margin:0 2px -2px 2px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#25D366"/><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" fill="white"/><path d="M12 4C7.589 4 4 7.589 4 12c0 1.42.374 2.75 1.025 3.904L4.04 19.96l4.056-1.064A7.953 7.953 0 0012 20c4.411 0 8-3.589 8-8s-3.589-8-8-8zm0 14.4a6.38 6.38 0 01-3.26-.896l-.234-.139-2.426.636.648-2.365-.153-.243A6.358 6.358 0 015.6 12c0-3.529 2.871-6.4 6.4-6.4 3.529 0 6.4 2.871 6.4 6.4 0 3.529-2.871 6.4-6.4 6.4z" fill="white"/></svg> · Free · No commitment</div>
+    </div>
+  </div>
+
+</section>
+
+</body>
+</html>
