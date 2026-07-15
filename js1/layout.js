@@ -372,7 +372,7 @@ function renderFooter() {
             </svg>
             Prism Global
           </a>
-          <p>On-demand manufacturing for CNC machining, injection molding, sheet metal, and 3D printing — engineered for speed without cutting corners on precision.</p>
+          <p>On-demand manufacturing for CNC machining, injection molding, sheet metal, and 3D printing engineered for speed without cutting corners on precision.</p>
         </div>
         <div class="footer-col"><h4>Capabilities</h4><ul>
           <li><a href="capabilities.html#cnc">CNC machining</a></li>
@@ -400,7 +400,7 @@ function renderFooter() {
       </div>
       <div class="footer-bottom">
         <span>&copy; 2026 Prism Global Manufacturing Co. All rights reserved.</span>
-        <span>Shenzhen &middot; Chicago &middot; Rotterdam</span>
+        <span>Made In India</span>
       </div>
     </div>
   `;
