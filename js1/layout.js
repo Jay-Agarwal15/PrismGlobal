@@ -293,12 +293,7 @@ function renderHeader() {
   header.innerHTML = `
     <nav class="nav">
       <a href="index.html" class="logo" aria-label="Prism Global home">
-        <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M16 2L29 24H3L16 2Z" stroke="#1E5EFF" stroke-width="2" stroke-linejoin="round"/>
-          <path d="M16 2L16 24" stroke="#00C2A8" stroke-width="1.4"/>
-          <path d="M16 24L22 14" stroke="#0B1E3D" stroke-width="1.2" opacity="0.5"/>
-          <path d="M16 24L10 14" stroke="#0B1E3D" stroke-width="1.2" opacity="0.5"/>
-        </svg>
+        <img src="prism-logo-mark.png" alt="Prism Global" class="logo-mark">
         Prism Global
       </a>
       <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" id="navToggle">
@@ -364,12 +359,7 @@ function renderFooter() {
       <div class="footer-grid">
         <div class="footer-col footer-brand">
           <a href="index.html" class="logo" style="color:white;" aria-label="Prism Global home">
-            <svg class="logo-mark" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <path d="M16 2L29 24H3L16 2Z" stroke="#1E5EFF" stroke-width="2" stroke-linejoin="round"/>
-              <path d="M16 2L16 24" stroke="#00C2A8" stroke-width="1.4"/>
-              <path d="M16 24L22 14" stroke="#ffffff" stroke-width="1.2" opacity="0.4"/>
-              <path d="M16 24L10 14" stroke="#ffffff" stroke-width="1.2" opacity="0.4"/>
-            </svg>
+            <img src="prism-logo-mark.png" alt="Prism Global" class="logo-mark">
             Prism Global
           </a>
           <p>On-demand manufacturing for CNC machining, injection molding, sheet metal, and 3D printing engineered for speed without cutting corners on precision.</p>
